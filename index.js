@@ -147,7 +147,7 @@ program
 //--check <file>
 if (program.check) {
   var content = readFile(program.check);
-  if (content != '')
+  if (content !== '')
     return console.log(checkType(content));
 }
 
