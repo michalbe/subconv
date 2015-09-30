@@ -149,6 +149,10 @@ program
   .option('-f, --fps [fps]', 'Set FPS for subtitle format[23.98]', 23.98)
   .parse(process.argv);
 
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+}
+
 //--check <file>
 if (program.check) {
   var content = readFile(program.check);
