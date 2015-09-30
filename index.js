@@ -104,7 +104,8 @@ var subRipTo = function(format, content, fps) {
           p7 = parseInt(p7, 10);
           p8 = parseInt(p8, 10) * 0.001;
 
-          return '{' + ~~((p1 + p2 + p3 + p4) * fps) + '}' + '{' + ~~((p5 + p6 + p7 + p8) * fps) + '}';
+          return '{' + ~~((p1 + p2 + p3 + p4) * fps) + '}' +
+                 '{' + ~~((p5 + p6 + p7 + p8) * fps) + '}';
         });
       content = content.replace(/\r\n/gi, '|');
       content = content.replace(/\|\|/gi, '\r\n');
