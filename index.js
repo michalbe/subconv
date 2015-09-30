@@ -1,5 +1,6 @@
 #! /usr/bin/node
 
+var pckg = require('./package.json');
 var program = require('commander');
 var fs = require('fs'),
   Buffer = require('buffer').Buffer;
@@ -139,7 +140,7 @@ var writeFile = function(filename, data) {
 };
 
 program
-  .version('0.0.1')
+  .version(pckg.version)
   .option('-c, --convert <format>', 'Convert input subtitles to output with' +
                                     ' selected format')
   .option('-i, --input <file>', 'Input file')
