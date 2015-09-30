@@ -135,13 +135,13 @@ var writeFile = function(filename, data) {
 
 program
   .version('0.0.1')
-  .option('-c, --convert <format>', 'convert input subtitles to output with' +
-    ' selected format')
-  .option('-i, --input <file>', 'input file')
-  .option('-o, --output <file>', 'output file')
+  .option('-c, --convert <format>', 'Convert input subtitles to output with' +
+                                    ' selected format')
+  .option('-i, --input <file>', 'Input file')
+  .option('-o, --output <file>', 'Output file')
   .option('-C, --check <file>', 'Chceck subtitle format in file')
   .option('-o, --output <outputFile>', 'File with converted subtitles')
-  .option('-f, --fps [fps]', 'Set FPS for some subtitles format[23.98]', 23.98)
+  .option('-f, --fps [fps]', 'Set FPS for subtitle format[23.98]', 23.98)
   .parse(process.argv);
 
 //--check <file>
@@ -154,7 +154,7 @@ if (program.check) {
 //--convert <format>
 if (program.convert) {
   if (!program.input) {
-    return console.log('you have to give input and output file');
+    return console.log('You have to provide input and output file');
   }
   var content = readFile(program.input);
   var output = program.input;
