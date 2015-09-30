@@ -1,5 +1,5 @@
-SUBCONV
-=======
+# SUBCONV
+Small command line tool for converting subtitles.
 
 ## ABOUT
 
