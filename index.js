@@ -26,7 +26,9 @@ var tmpTo = function(format, content, fps) {
       var subsArray = [];
       content.replace(/(\d+):(\d+):(\d+):(.*)/gi,
         function(match, p1, p2, p3, p4, offset, string) {
-          var beginTime = (parseInt(p1) * 3600 + parseInt(p2) * 60 + parseInt(p3)) * 10;
+          var beginTime = (parseInt(p1, 10)  * 3600 +
+                           parseInt(p2, 10)  * 60 +
+                           parseInt(p3, 10)) * 10;
           subsArray.push({
             startTime: beginTime,
             sub: p4
@@ -45,7 +47,7 @@ var mpl2To = function(format, content, fps) {
     case 'TMP':
       content = content.replace(/\[(\d+)\]\[(\d+)\](.*)/gi,
         function(match, p1, p2, p3, offset, string) {
-          var time = ~~(parseInt(p1) / 10);
+          var time = ~~(parseInt(p1, 10) / 10);
           var hours = ~~(time / 3600);
           time = time % 3600;
           var minutes = ~~(time / 60);
@@ -58,7 +60,8 @@ var mpl2To = function(format, content, fps) {
     case 'MicroDVD':
       content = content.replace(/\{(\d+)\}\{(\d+)\}(.*)/gi,
         function(match, p1, p2, p3, offset, string) {
-          return '[' + ~~(parseInt(p1) * 10 / fps) + ']' + '[' + ~~(parseInt(p2) * 10 / fps) + ']' + p3;
+          return '[' + ~~(parseInt(p1, 10) * 10 / fps) + ']' +
+                 '[' + ~~(parseInt(p2, 10) * 10 / fps) + ']' + p3;
         });
       return content;
     case 'SubRip':
@@ -73,7 +76,8 @@ var microDvdTo = function(format, content, fps) {
     case 'MPL2':
       content = content.replace(/\[(\d+)\]\[(\d+)\](.*)/gi,
         function(match, p1, p2, p3, offset, string) {
-          return '{' + ~~(parseInt(p1) * fps / 10) + '}' + '{' + ~~(parseInt(p2) * fps / 10) + '}' + p3;
+          return '{' + ~~(parseInt(p1, 10) * fps / 10) + '}' +
+                 '{' + ~~(parseInt(p2, 10) * fps / 10) + '}' + p3;
         });
       return content;
     case 'MicroDVD':
@@ -90,15 +94,15 @@ var subRipTo = function(format, content, fps) {
     case 'MPL2':
       content = content.replace(/\d*\W*\n(\d\d):(\d\d):(\d\d),(\d*)\s*-->\s*(\d\d):(\d\d):(\d\d),(\d*)\W*\n/gi,
         function(match, p1, p2, p3, p4, p5, p6, p7, p8, offset, string) {
-          p1 = parseInt(p1) * 3600;
-          p2 = parseInt(p2) * 60;
-          p3 = parseInt(p3);
-          p4 = parseInt(p4) * 0.001;
+          p1 = parseInt(p1, 10) * 3600;
+          p2 = parseInt(p2, 10) * 60;
+          p3 = parseInt(p3, 10);
+          p4 = parseInt(p4, 10) * 0.001;
 
-          p5 = parseInt(p5) * 3600;
-          p6 = parseInt(p6) * 60;
-          p7 = parseInt(p7);
-          p8 = parseInt(p8) * 0.001;
+          p5 = parseInt(p5, 10) * 3600;
+          p6 = parseInt(p6, 10) * 60;
+          p7 = parseInt(p7, 10);
+          p8 = parseInt(p8, 10) * 0.001;
 
           return '{' + ~~((p1 + p2 + p3 + p4) * fps) + '}' + '{' + ~~((p5 + p6 + p7 + p8) * fps) + '}';
         });
